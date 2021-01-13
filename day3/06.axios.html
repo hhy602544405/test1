@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+
+<body>
+    <div id="app">
+        <!-- <div v-for='(item,index) in aaa' :key='index'> -->
+        <!-- <h1> -->
+        <!-- {{msg}} -->
+        <!-- {{id}} 
+            {{username}}
+            {{pwd}}
+            {{phone}}
+            </h1>
+
+            <button  @click='click(index)'>点击获取数据</button> -->
+
+        <!-- </div> -->
+
+        <ul>
+            <li :key='item.id' v-for='(item,index) in list'
+                style="list-style-type: none; border:2px solid black; color:blue">
+                <!-- <input type="checkbok"> -->
+                用户id：{{item._id}} &emsp;&emsp;
+                用户名：{{item.userName}} &emsp;&emsp;
+                密码：{{item.password}} &emsp;&emsp; 电话：{{item.phone}} &emsp;&emsp;
+            </li>
+            <button @click='click'>点击获取数据</button>
+        </ul>
+
+    </div>
+</body>
+
+</html>
+<script src="../vue.js"></script>
+<script type="text/javascript" src="https://cdn.bootcss.com/axios/0.19.0-beta.1/axios.js"></script>
+
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            // aaa:[],
+            list: [],
+            id: '',
+            username: '',
+            pwd: '',
+            phone: ''
+        },
+        methods: {
+            click() {
+                axios({
+                    url: 'http://localhost:8888/vuestudy',
+                    method: 'get',
+                    params: {
+
+                    }
+                }).then(res => {
+                    console.log(res.data);
+                    // {id,username,age,phone} = res.data,
+                    // this.aaa = res.data
+
+                    // this.msg.push = ['res.data[0]._id'],
+                    this.list = res.data
+                    // this.id = res.data[0]._id,
+                    // this.username = res.data[0].userName,
+                    // this.pwd = res.data[0].password,
+                    // this.phone = res.data[0].phone
+
+                }).catch(error => {
+                    console.log(error);
+                })
+                console.log('进入了生命周期');
+            }
+        },
+
+
+        crreated() {
+
+        }
+
+
+
+
+    })
+</script>

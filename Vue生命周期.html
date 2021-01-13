@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <h1>{{msg}}</h1>
+
+        <h1>{{num}}</h1>
+        <button @click='num1'>七十二变</button>
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                fruits: ['apple', 'pear', 'banana', 'orange'],
+                msg: '好久不见',
+                num: 0,
+            },
+            methods: {
+                submit() {
+                    console.log('我进入到submit里面了');
+                },
+                adc() {
+                    console.log('我是adc');
+                },
+                num1() {
+                    this.num++,
+                        console.log('我进入num里面了');
+                }
+
+            },
+            //生命周期函数 beforeCreate
+            //创建之前 new操作部署能力过程中 还没全部准备完成
+            //这里el和data并未初始化,所以下面的log都是undefined
+            beforeCreate() {
+                console.log('我进入了生命周期函数beforeCreate');
+                console.log(this.data);
+                console.log(this.fruits);
+            },
+            //这是生命周期函数 created
+            //创建之后 data methods 已经部署完成
+            //完成了data数据的初始化,所以能够看到data中的数组
+            created() {
+                console.log('我进入了生命周期created');
+                console.log(this.fruits);
+            },
+            //这一步 是准备把数据渲染给页面的前一步了，可以做到检查数据是不是对，如果不对的话，马上变
+            beforeMount() {
+                console.log('我进入beforeMount了');
+                console.log(this.fruits);
+                if (this.msg = '好久不见') {
+                    this.msg = '单依纯'
+                }
+            },
+            mounted() {
+                console.log('mounted');
+            },
+            //数据更新前
+            beforeUpdate() {
+                console.log('我进入beforeUpdate');
+            },
+            //数据更新后
+            updated() {
+                console.log('我进入updated');
+            },
+            //页面销毁之前
+            beforeDestroy() {
+                console.log('页面销毁之前');
+            },
+            //页面销毁之后
+            destoyed() {
+                console.log('页面销毁之后');
+            }
+        })
+        console.log(app);
+
+    </script>
+</body>
+
+
+</html>
